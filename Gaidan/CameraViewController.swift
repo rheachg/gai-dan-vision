@@ -12,10 +12,12 @@ import AVFoundation
 class CameraViewController: UIViewController {
     
     private var captureSession: AVCaptureSession!
+    private var previewLayer: AVCaptureVideoPreviewLayer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpCaptureSession()
+        setUpPreviewLayer()
     }
     
 }
@@ -29,5 +31,11 @@ extension CameraViewController {
             let captureInputDevice = try? AVCaptureDeviceInput(device: camera)
             else { return }
         captureSession.addInput(captureInputDevice)
+    }
+    
+    func setUpPreviewLayer() {
+        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        previewLayer.videoGravity = .resizeAspectFill
+        view.layer.addSublayer(previewLayer)
     }
 }
