@@ -9,11 +9,20 @@
 import UIKit
 import AVFoundation
 
+protocol CameraViewControllerDelegate: class {
+    func cameraViewController(_ controller: CameraViewController, didCapture buffer: CMSampleBuffer)
+}
+
 class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
+    
+    weak var delegate: CameraViewControllerDelegate?
     
     private var captureSession: AVCaptureSession!
     private var previewLayer: AVCaptureVideoPreviewLayer!
     private var videoOutput: AVCaptureVideoDataOutput!
+    
+    // placeholder for passing buffer to touchesBegan
+    var buffer: CMSampleBuffer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +39,16 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
         previewLayer.frame = view.bounds
     }
     
+    func captureOutput( _ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+        buffer = sampleBuffer
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let sampleBuffer = buffer {
+            delegate?.cameraViewController(self, didCapture: sampleBuffer)
+        }
+    }
+
 }
 
 extension CameraViewController {
