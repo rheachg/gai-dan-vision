@@ -9,15 +9,20 @@
 import UIKit
 import AVFoundation
 
-class CameraViewController: UIViewController {
+class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
     
     private var captureSession: AVCaptureSession!
     private var previewLayer: AVCaptureVideoPreviewLayer!
+    private var videoOutput: AVCaptureVideoDataOutput!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setUpCaptureSession()
         setUpPreviewLayer()
+        setUpVideoOutput()
+        
+        captureSession.startRunning()
     }
     
 }
@@ -29,7 +34,7 @@ extension CameraViewController {
         guard
             let camera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back),
             let captureInputDevice = try? AVCaptureDeviceInput(device: camera)
-            else { return }
+        else { return }
         captureSession.addInput(captureInputDevice)
     }
     
@@ -37,5 +42,11 @@ extension CameraViewController {
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         previewLayer.videoGravity = .resizeAspectFill
         view.layer.addSublayer(previewLayer)
+    }
+    
+    func setUpVideoOutput() {
+        videoOutput = AVCaptureVideoDataOutput()
+        videoOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "VideoQueue"))
+        captureSession.addOutput(videoOutput)
     }
 }
