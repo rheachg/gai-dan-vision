@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD80D17921072D8000342227 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD80D17821072D8000342227 /* CameraViewController.swift */; };
 		FDADAE302106C6F50067DAB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDADAE2F2106C6F50067DAB4 /* AppDelegate.swift */; };
 		FDADAE322106C6F50067DAB4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDADAE312106C6F50067DAB4 /* ViewController.swift */; };
 		FDADAE352106C6F50067DAB4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDADAE332106C6F50067DAB4 /* Main.storyboard */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FD80D17821072D8000342227 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		FDADAE2C2106C6F50067DAB4 /* Gaidan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gaidan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDADAE2F2106C6F50067DAB4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FDADAE312106C6F50067DAB4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -55,6 +57,7 @@
 			isa = PBXGroup;
 			children = (
 				FDADAE2F2106C6F50067DAB4 /* AppDelegate.swift */,
+				FD80D17821072D8000342227 /* CameraViewController.swift */,
 				FDADAE312106C6F50067DAB4 /* ViewController.swift */,
 				FDADAE332106C6F50067DAB4 /* Main.storyboard */,
 				FDADAE362106C6F70067DAB4 /* Assets.xcassets */,
@@ -137,6 +140,7 @@
 			files = (
 				FDADAE322106C6F50067DAB4 /* ViewController.swift in Sources */,
 				FDADAE302106C6F50067DAB4 /* AppDelegate.swift in Sources */,
+				FD80D17921072D8000342227 /* CameraViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,7 +285,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SGLNWMQ66C;
 				INFOPLIST_FILE = Gaidan/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -298,7 +304,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SGLNWMQ66C;
 				INFOPLIST_FILE = Gaidan/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
