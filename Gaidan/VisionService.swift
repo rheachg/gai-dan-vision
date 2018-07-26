@@ -20,8 +20,27 @@ class VisionService {
     
     func performVision(buffer: CMSampleBuffer) {
         guard let image = getImageFromBuffer(sampleBuffer: buffer) else { return }
-        let orientation = inferOrientation(image: image)
+        guard let cgImage = image.cgImage else {
+            assertionFailure()
+            return
+        }
         
+        let handler = VNImageRequestHandler(
+            cgImage: cgImage,
+            orientation: inferOrientation(image: image),
+            options: [VNImageOption: Any]()
+        )
+        
+        let request = VNDetectTextRectanglesRequest(completionHandler: { [weak self] request, error in
+            DispatchQueue.main.async {
+                self?.handle(image: image, request: request, error: error)
+            }
+        })
+        
+        request.reportCharacterBoxes = true
+        
+        do { try handler.perform([request]) }
+        catch { print(error as Any) }
     }
     
     private func handle(image: UIImage, request: VNRequest, error: Error?) {
@@ -32,6 +51,8 @@ class VisionService {
 }
 
 extension VisionService {
+    
+    // CVImageBuffer -> CIImage -> CGImage -> UIImage in order to prevent pile up in memory
     func getImageFromBuffer(sampleBuffer: CMSampleBuffer) -> UIImage? {
         guard let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return nil }
         let ciImage = CIImage(cvPixelBuffer: imageBuffer)
@@ -40,6 +61,23 @@ extension VisionService {
     }
     
     func inferOrientation(image: UIImage) -> CGImagePropertyOrientation {
-        
+        switch image.imageOrientation {
+            case .up:
+                return CGImagePropertyOrientation.up
+            case .upMirrored:
+                return CGImagePropertyOrientation.upMirrored
+            case .down:
+                return CGImagePropertyOrientation.down
+            case .downMirrored:
+                return CGImagePropertyOrientation.downMirrored
+            case .left:
+                return CGImagePropertyOrientation.left
+            case .leftMirrored:
+                return CGImagePropertyOrientation.leftMirrored
+            case .right:
+                return CGImagePropertyOrientation.right
+            case .rightMirrored:
+                return CGImagePropertyOrientation.rightMirrored
+        }
     }
 }
