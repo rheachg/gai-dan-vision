@@ -60,12 +60,12 @@
 			children = (
 				FDADAE2F2106C6F50067DAB4 /* AppDelegate.swift */,
 				FD80D17821072D8000342227 /* CameraViewController.swift */,
+				FD80D17A2109A92200342227 /* VisionService.swift */,
 				FDADAE312106C6F50067DAB4 /* ViewController.swift */,
 				FDADAE332106C6F50067DAB4 /* Main.storyboard */,
 				FDADAE362106C6F70067DAB4 /* Assets.xcassets */,
 				FDADAE382106C6F70067DAB4 /* LaunchScreen.storyboard */,
 				FDADAE3B2106C6F70067DAB4 /* Info.plist */,
-				FD80D17A2109A92200342227 /* VisionService.swift */,
 			);
 			path = Gaidan;
 			sourceTree = "<group>";

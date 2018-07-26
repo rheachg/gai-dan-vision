@@ -6,15 +6,16 @@
 //  Copyright © 2018 Rhea Chugh. All rights reserved.
 //
 
+import AVFoundation
 import UIKit
 
 class ViewController: UIViewController {
     
-    private let camera = CameraViewController()
+    private let cameraViewController = CameraViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        camera.delegate = self
+        cameraViewController.delegate = self
         
     }
 
@@ -28,7 +29,6 @@ class ViewController: UIViewController {
 
 extension ViewController: CameraViewControllerDelegate {
     func cameraViewController(_ controller: CameraViewController, didCapture buffer: CMSampleBuffer) {
-        // convert sample buffer to uiimage
-        // perform vision service
+        
     }
 }
