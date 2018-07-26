@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FD80D17921072D8000342227 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD80D17821072D8000342227 /* CameraViewController.swift */; };
+		FD80D17B2109A92200342227 /* VisionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD80D17A2109A92200342227 /* VisionService.swift */; };
 		FDADAE302106C6F50067DAB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDADAE2F2106C6F50067DAB4 /* AppDelegate.swift */; };
 		FDADAE322106C6F50067DAB4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDADAE312106C6F50067DAB4 /* ViewController.swift */; };
 		FDADAE352106C6F50067DAB4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDADAE332106C6F50067DAB4 /* Main.storyboard */; };
@@ -17,6 +18,7 @@
 
 /* Begin PBXFileReference section */
 		FD80D17821072D8000342227 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		FD80D17A2109A92200342227 /* VisionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionService.swift; sourceTree = "<group>"; };
 		FDADAE2C2106C6F50067DAB4 /* Gaidan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gaidan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDADAE2F2106C6F50067DAB4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FDADAE312106C6F50067DAB4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 				FDADAE362106C6F70067DAB4 /* Assets.xcassets */,
 				FDADAE382106C6F70067DAB4 /* LaunchScreen.storyboard */,
 				FDADAE3B2106C6F70067DAB4 /* Info.plist */,
+				FD80D17A2109A92200342227 /* VisionService.swift */,
 			);
 			path = Gaidan;
 			sourceTree = "<group>";
@@ -141,6 +144,7 @@
 				FDADAE322106C6F50067DAB4 /* ViewController.swift in Sources */,
 				FDADAE302106C6F50067DAB4 /* AppDelegate.swift in Sources */,
 				FD80D17921072D8000342227 /* CameraViewController.swift in Sources */,
+				FD80D17B2109A92200342227 /* VisionService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

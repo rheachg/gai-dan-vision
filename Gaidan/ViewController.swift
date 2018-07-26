@@ -9,10 +9,13 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    private let camera = CameraViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        camera.delegate = self
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -23,3 +26,9 @@ class ViewController: UIViewController {
 
 }
 
+extension ViewController: CameraViewControllerDelegate {
+    func cameraViewController(_ controller: CameraViewController, didCapture buffer: CMSampleBuffer) {
+        // convert sample buffer to uiimage
+        // perform vision service
+    }
+}

@@ -21,7 +21,7 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     private var previewLayer: AVCaptureVideoPreviewLayer!
     private var videoOutput: AVCaptureVideoDataOutput!
     
-    // placeholder for passing buffer to touchesBegan
+    // placeholder for passing captured buffer to touchesBegan
     var buffer: CMSampleBuffer?
     
     override func viewDidLoad() {
@@ -59,6 +59,7 @@ extension CameraViewController {
             let camera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back),
             let captureInputDevice = try? AVCaptureDeviceInput(device: camera)
         else { return }
+//        guard captureSession.canAddInput(captureInputDevice) else { return }
         captureSession.addInput(captureInputDevice)
     }
     
@@ -71,6 +72,7 @@ extension CameraViewController {
     func setUpVideoOutput() {
         videoOutput = AVCaptureVideoDataOutput()
         videoOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "VideoQueue"))
+//        guard captureSession.canAddOutput(videoOutput) else { return }
         captureSession.addOutput(videoOutput)
     }
 }
