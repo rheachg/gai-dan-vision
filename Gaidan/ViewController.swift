@@ -6,13 +6,22 @@
 //  Copyright © 2018 Rhea Chugh. All rights reserved.
 //
 
+import AVFoundation
 import UIKit
+import Vision
 
 class ViewController: UIViewController {
-
+    
+    private let cameraViewController = CameraViewController()
+    private let visionService = VisionService()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        // add to child controller
+        cameraViewController.delegate = self
+        
+        visionService.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,5 +30,17 @@ class ViewController: UIViewController {
     }
 
 
+}
+
+extension ViewController: CameraViewControllerDelegate {
+    func cameraViewController(_ controller: CameraViewController, didCapture buffer: CMSampleBuffer) {
+        visionService.performVision(buffer: buffer)
+    }
+}
+
+extension ViewController: VisionServiceDelegate {
+    func visionService(_ version: VisionService, didDetect image: UIImage, results: [VNTextObservation]) {
+        
+    }
 }
 
