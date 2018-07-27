@@ -7,8 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		62A76A2F9877180350E643E9 /* Pods_Gaidan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D1199898BE43AD57EFAF1BF /* Pods_Gaidan.framework */; };
+		FD6E28AE210AEDC800FE3F01 /* TesseractOCR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD6E28AD210AEDC800FE3F01 /* TesseractOCR.framework */; };
+		FD6E28B0210AEDDE00FE3F01 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD6E28AF210AEDDE00FE3F01 /* CoreImage.framework */; };
+		FD6E28B2210AEDF600FE3F01 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FD6E28B1210AEDF600FE3F01 /* libstdc++.6.0.9.tbd */; };
 		FD80D17921072D8000342227 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD80D17821072D8000342227 /* CameraViewController.swift */; };
 		FD80D17B2109A92200342227 /* VisionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD80D17A2109A92200342227 /* VisionService.swift */; };
+		FD80D17D210AEC1000342227 /* OCRService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD80D17C210AEC1000342227 /* OCRService.swift */; };
+		FD80D181210AED0900342227 /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = FD80D180210AED0900342227 /* tessdata */; };
 		FDADAE302106C6F50067DAB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDADAE2F2106C6F50067DAB4 /* AppDelegate.swift */; };
 		FDADAE322106C6F50067DAB4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDADAE312106C6F50067DAB4 /* ViewController.swift */; };
 		FDADAE352106C6F50067DAB4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDADAE332106C6F50067DAB4 /* Main.storyboard */; };
@@ -17,8 +23,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01797438E5A442735A5D12B2 /* Pods-Gaidan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gaidan.release.xcconfig"; path = "Pods/Target Support Files/Pods-Gaidan/Pods-Gaidan.release.xcconfig"; sourceTree = "<group>"; };
+		7D1199898BE43AD57EFAF1BF /* Pods_Gaidan.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gaidan.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7FAB5C5B4944148FF1F1D7A0 /* Pods-Gaidan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gaidan.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Gaidan/Pods-Gaidan.debug.xcconfig"; sourceTree = "<group>"; };
+		FD6E28AD210AEDC800FE3F01 /* TesseractOCR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TesseractOCR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD6E28AF210AEDDE00FE3F01 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		FD6E28B1210AEDF600FE3F01 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
 		FD80D17821072D8000342227 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		FD80D17A2109A92200342227 /* VisionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionService.swift; sourceTree = "<group>"; };
+		FD80D17C210AEC1000342227 /* OCRService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRService.swift; sourceTree = "<group>"; };
+		FD80D180210AED0900342227 /* tessdata */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tessdata; sourceTree = "<group>"; };
 		FDADAE2C2106C6F50067DAB4 /* Gaidan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gaidan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDADAE2F2106C6F50067DAB4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FDADAE312106C6F50067DAB4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -33,17 +47,43 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62A76A2F9877180350E643E9 /* Pods_Gaidan.framework in Frameworks */,
+				FD6E28AE210AEDC800FE3F01 /* TesseractOCR.framework in Frameworks */,
+				FD6E28B0210AEDDE00FE3F01 /* CoreImage.framework in Frameworks */,
+				FD6E28B2210AEDF600FE3F01 /* libstdc++.6.0.9.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6FB5C0E139CCE15E025E9964 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7FAB5C5B4944148FF1F1D7A0 /* Pods-Gaidan.debug.xcconfig */,
+				01797438E5A442735A5D12B2 /* Pods-Gaidan.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		CDAB502367EE7513DCB82184 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FD6E28B1210AEDF600FE3F01 /* libstdc++.6.0.9.tbd */,
+				FD6E28AF210AEDDE00FE3F01 /* CoreImage.framework */,
+				FD6E28AD210AEDC800FE3F01 /* TesseractOCR.framework */,
+				7D1199898BE43AD57EFAF1BF /* Pods_Gaidan.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		FDADAE232106C6F50067DAB4 = {
 			isa = PBXGroup;
 			children = (
 				FDADAE2E2106C6F50067DAB4 /* Gaidan */,
 				FDADAE2D2106C6F50067DAB4 /* Products */,
+				6FB5C0E139CCE15E025E9964 /* Pods */,
+				CDAB502367EE7513DCB82184 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,8 +98,10 @@
 		FDADAE2E2106C6F50067DAB4 /* Gaidan */ = {
 			isa = PBXGroup;
 			children = (
+				FD80D180210AED0900342227 /* tessdata */,
 				FDADAE2F2106C6F50067DAB4 /* AppDelegate.swift */,
 				FD80D17821072D8000342227 /* CameraViewController.swift */,
+				FD80D17C210AEC1000342227 /* OCRService.swift */,
 				FD80D17A2109A92200342227 /* VisionService.swift */,
 				FDADAE312106C6F50067DAB4 /* ViewController.swift */,
 				FDADAE332106C6F50067DAB4 /* Main.storyboard */,
@@ -77,9 +119,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FDADAE3E2106C6F70067DAB4 /* Build configuration list for PBXNativeTarget "Gaidan" */;
 			buildPhases = (
+				D2B8B265E69F85C0851BCB5E /* [CP] Check Pods Manifest.lock */,
 				FDADAE282106C6F50067DAB4 /* Sources */,
 				FDADAE292106C6F50067DAB4 /* Frameworks */,
 				FDADAE2A2106C6F50067DAB4 /* Resources */,
+				8795765605AEC1CF1D1502DF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -129,6 +173,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FDADAE3A2106C6F70067DAB4 /* LaunchScreen.storyboard in Resources */,
+				FD80D181210AED0900342227 /* tessdata in Resources */,
 				FDADAE372106C6F70067DAB4 /* Assets.xcassets in Resources */,
 				FDADAE352106C6F50067DAB4 /* Main.storyboard in Resources */,
 			);
@@ -136,11 +181,51 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		8795765605AEC1CF1D1502DF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Gaidan/Pods-Gaidan-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/TesseractOCRiOS/TesseractOCR.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TesseractOCR.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Gaidan/Pods-Gaidan-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D2B8B265E69F85C0851BCB5E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Gaidan-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		FDADAE282106C6F50067DAB4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD80D17D210AEC1000342227 /* OCRService.swift in Sources */,
 				FDADAE322106C6F50067DAB4 /* ViewController.swift in Sources */,
 				FDADAE302106C6F50067DAB4 /* AppDelegate.swift in Sources */,
 				FD80D17921072D8000342227 /* CameraViewController.swift in Sources */,
@@ -205,6 +290,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -265,6 +351,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -286,10 +373,12 @@
 		};
 		FDADAE3F2106C6F70067DAB4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7FAB5C5B4944148FF1F1D7A0 /* Pods-Gaidan.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SGLNWMQ66C;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Gaidan/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -305,10 +394,12 @@
 		};
 		FDADAE402106C6F70067DAB4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 01797438E5A442735A5D12B2 /* Pods-Gaidan.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SGLNWMQ66C;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Gaidan/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = (
