@@ -48,12 +48,9 @@ class VisionService {
 
 extension VisionService {
     
-    // CVImageBuffer -> CIImage -> CGImage -> UIImage in order to prevent pile up in memory
     func getImageFromBuffer(sampleBuffer: CMSampleBuffer) -> CIImage? {
         guard let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return nil }
         let ciImage = CIImage(cvPixelBuffer: imageBuffer)
         return ciImage
-//        guard let cgImage = CIContext().createCGImage(ciImage, from: ciImage.extent) else { return nil }
-//        return UIImage(cgImage: cgImage)
     }
 }

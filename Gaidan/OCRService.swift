@@ -30,6 +30,13 @@ class OCRService {
             guard let rects = textObservation.characterBoxes else { continue }
             let (xMin, xMax, yMin, yMax) = getRectDimensions(rects: rects)
             let imageRect = CGRect(x: xMin * size.width, y: yMin * size.height, width: (xMax - xMin) * size.width, height: (yMax - yMin) * size.height)
+            
+            let image = getImageFromCGRect(rect: imageRect, ciImage: ciImage)
+            tesseract.image = image?.g8_blackAndWhite()
+            tesseract.recognize()
+            
+            guard var text = tesseract.recognizedText else { continue }
+            
         }
         
     }
@@ -52,6 +59,11 @@ extension OCRService {
             yMax = max(yMax, rect.topRight.y)
         }
         return (xMin, xMax, yMin, yMax)
+    }
+    
+    func getImageFromCGRect(rect: CGRect, ciImage: CIImage) -> UIImage? {
+        guard let cgImage = CIContext().createCGImage(ciImage, from: rect) else { return nil }
+        return UIImage(cgImage: cgImage)
     }
     
 }
