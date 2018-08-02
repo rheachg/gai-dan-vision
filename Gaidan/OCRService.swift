@@ -11,7 +11,12 @@ import Vision
 import AVFoundation
 
 class OCRService {
-    private let tesseract = G8Tesseract(language: "chi_tra", engineMode: .tesseractOnly)
+    private let tesseract = G8Tesseract(language: "chi_tra")!
+    
+    init() {
+        tesseract.engineMode = .tesseractOnly
+        tesseract.pageSegmentationMode = .sparseText
+    }
     
     func performRecognition(previewLayer: AVCaptureVideoPreviewLayer, ciImage: CIImage, results: [VNTextObservation], on view: UIView) {
         
