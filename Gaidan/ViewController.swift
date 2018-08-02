@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     
     private let cameraViewController = CameraViewController()
     private let visionService = VisionService()
+    private let ocrService = OCRService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,8 +40,8 @@ extension ViewController: CameraViewControllerDelegate {
 }
 
 extension ViewController: VisionServiceDelegate {
-    func visionService(_ version: VisionService, didDetect image: UIImage, results: [VNTextObservation]) {
-        
+    func visionService(_ version: VisionService, didDetect ciImage: CIImage, results: [VNTextObservation]) {
+        ocrService.performRecognition(previewLayer: cameraViewController.previewLayer, ciImage: ciImage, results: results, on: cameraViewController.view)
     }
 }
 

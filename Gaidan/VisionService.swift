@@ -11,7 +11,7 @@ import UIKit
 import Vision
 
 protocol VisionServiceDelegate: class {
-    func visionService(_ version: VisionService, didDetect image: UIImage, results: [VNTextObservation])
+    func visionService(_ version: VisionService, didDetect ciImage: CIImage, results: [VNTextObservation])
 }
 
 class VisionService {
@@ -19,21 +19,17 @@ class VisionService {
     weak var delegate: VisionServiceDelegate?
     
     func performVision(buffer: CMSampleBuffer) {
-        guard let image = getImageFromBuffer(sampleBuffer: buffer) else { return }
-        guard let cgImage = image.cgImage else {
-            assertionFailure()
-            return
-        }
+        guard let ciImage = getImageFromBuffer(sampleBuffer: buffer) else { return }
         
         let handler = VNImageRequestHandler(
-            cgImage: cgImage,
-            orientation: inferOrientation(image: image),
+            ciImage: ciImage,
+            orientation: CGImagePropertyOrientation(rawValue: 6)!,
             options: [VNImageOption: Any]()
         )
         
         let request = VNDetectTextRectanglesRequest(completionHandler: { [weak self] request, error in
             DispatchQueue.main.async {
-                self?.handle(image: image, request: request, error: error)
+                self?.handle(ciImage: ciImage, request: request, error: error)
             }
         })
         
@@ -43,9 +39,9 @@ class VisionService {
         catch { print(error as Any) }
     }
     
-    private func handle(image: UIImage, request: VNRequest, error: Error?) {
+    private func handle(ciImage: CIImage, request: VNRequest, error: Error?) {
         guard let results = request.results as? [VNTextObservation] else { return }
-        delegate?.visionService(self, didDetect: image, results: results)
+        delegate?.visionService(self, didDetect: ciImage, results: results)
     }
     
 }
@@ -53,31 +49,11 @@ class VisionService {
 extension VisionService {
     
     // CVImageBuffer -> CIImage -> CGImage -> UIImage in order to prevent pile up in memory
-    func getImageFromBuffer(sampleBuffer: CMSampleBuffer) -> UIImage? {
+    func getImageFromBuffer(sampleBuffer: CMSampleBuffer) -> CIImage? {
         guard let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return nil }
         let ciImage = CIImage(cvPixelBuffer: imageBuffer)
-        guard let cgImage = CIContext().createCGImage(ciImage, from: ciImage.extent) else { return nil }
-        return UIImage(cgImage: cgImage)
-    }
-    
-    func inferOrientation(image: UIImage) -> CGImagePropertyOrientation {
-        switch image.imageOrientation {
-            case .up:
-                return CGImagePropertyOrientation.up
-            case .upMirrored:
-                return CGImagePropertyOrientation.upMirrored
-            case .down:
-                return CGImagePropertyOrientation.down
-            case .downMirrored:
-                return CGImagePropertyOrientation.downMirrored
-            case .left:
-                return CGImagePropertyOrientation.left
-            case .leftMirrored:
-                return CGImagePropertyOrientation.leftMirrored
-            case .right:
-                return CGImagePropertyOrientation.right
-            case .rightMirrored:
-                return CGImagePropertyOrientation.rightMirrored
-        }
+        return ciImage
+//        guard let cgImage = CIContext().createCGImage(ciImage, from: ciImage.extent) else { return nil }
+//        return UIImage(cgImage: cgImage)
     }
 }

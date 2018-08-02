@@ -18,7 +18,7 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     weak var delegate: CameraViewControllerDelegate?
     
     private var captureSession: AVCaptureSession!
-    private var previewLayer: AVCaptureVideoPreviewLayer!
+    public var previewLayer: AVCaptureVideoPreviewLayer!
     private var videoOutput: AVCaptureVideoDataOutput!
     
     // placeholder for passing captured buffer to touchesBegan
