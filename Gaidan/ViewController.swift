@@ -6,6 +6,7 @@
 //  Copyright © 2018 Rhea Chugh. All rights reserved.
 //
 
+import Anchors
 import AVFoundation
 import UIKit
 import Vision
@@ -19,8 +20,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // add to child controller
         cameraViewController.delegate = self
+        add(childController: cameraViewController)
+        activate(cameraViewController.view.anchor.edges)
         
         visionService.delegate = self
     }
@@ -45,3 +47,10 @@ extension ViewController: VisionServiceDelegate {
     }
 }
 
+extension UIViewController {
+    func add(childController: UIViewController) {
+        childController.willMove(toParentViewController: self)
+        view.addSubview(childController.view)
+        childController.didMove(toParentViewController: self)
+    }
+}
