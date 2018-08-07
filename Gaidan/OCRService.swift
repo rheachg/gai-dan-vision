@@ -14,7 +14,7 @@ class OCRService {
     
     private let tesseract = G8Tesseract(language: "chi_tra")!
     private var textObservations: [VNTextObservation] = []
-    private var detectedRects: [CGRect] = []
+    private var detectedRects = [(rect: CGRect, text: String)]()
     
     init() {
         tesseract.engineMode = .tesseractOnly
@@ -36,9 +36,24 @@ class OCRService {
             tesseract.recognize()
             
             guard var text = tesseract.recognizedText else { continue }
+            text = text.trimmingCharacters(in: CharacterSet.newlines)
+            
+            for chr in text {
+                if chr == "雞" || chr == "蛋" {
+                    text = text.replacingOccurrences(of: "雞", with: "chicken")
+                    text = text.replacingOccurrences(of: "蛋", with: "egg")
+                    
+                    if !text.isEmpty {
+                        let x = xMin
+                        let y = 1 - yMax
+                        let width = xMax - xMin
+                        let height = yMax - yMin
+                        detectedRects.append((rect: CGRect(x: x, y: y, width: width, height: height), text: text))
+                    }
+                }
+            }
             
         }
-        
     }
     
 }
@@ -46,7 +61,6 @@ class OCRService {
 extension OCRService {
     
     func getRectDimensions(rects: [VNRectangleObservation]) -> (CGFloat, CGFloat, CGFloat, CGFloat) {
-        
         var xMin = CGFloat.greatestFiniteMagnitude
         var xMax: CGFloat = 0
         var yMin = CGFloat.greatestFiniteMagnitude
@@ -58,6 +72,7 @@ extension OCRService {
             xMax = max(xMax, rect.bottomRight.x)
             yMax = max(yMax, rect.topRight.y)
         }
+        
         return (xMin, xMax, yMin, yMax)
     }
     
