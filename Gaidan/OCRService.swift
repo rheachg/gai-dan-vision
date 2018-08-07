@@ -53,12 +53,37 @@ class OCRService {
                 }
             }
             
+            textObservations.removeAll()
+            removeLayers(on: view)
+            addRectLayers(on: view)
         }
     }
-    
 }
 
 extension OCRService {
+    
+    func addRectLayers(on view: UIView) {
+        for tuple in detectedRects {
+            let layer = CATextLayer()
+            layer.backgroundColor = UIColor.clear.cgColor
+            var rect = tuple.rect
+            
+            rect.origin.x *= view.frame.size.width
+            rect.origin.y *= view.frame.size.height
+            rect.size.width *= view.frame.size.width
+            rect.size.height *= view.frame.size.height
+            
+            layer.frame = rect
+            layer.string = tuple.text
+            layer.foregroundColor = UIColor.darkGray.cgColor
+            view.layer.addSublayer(layer)
+        }        
+    }
+    
+    func getImageFromCGRect(rect: CGRect, ciImage: CIImage) -> UIImage? {
+        guard let cgImage = CIContext().createCGImage(ciImage, from: rect) else { return nil }
+        return UIImage(cgImage: cgImage)
+    }
     
     func getRectDimensions(rects: [VNRectangleObservation]) -> (CGFloat, CGFloat, CGFloat, CGFloat) {
         var xMin = CGFloat.greatestFiniteMagnitude
@@ -76,9 +101,13 @@ extension OCRService {
         return (xMin, xMax, yMin, yMax)
     }
     
-    func getImageFromCGRect(rect: CGRect, ciImage: CIImage) -> UIImage? {
-        guard let cgImage = CIContext().createCGImage(ciImage, from: rect) else { return nil }
-        return UIImage(cgImage: cgImage)
+    func removeLayers(on view: UIView) {
+        view.layer.sublayers?.forEach {
+            if let _ = $0 as? CATextLayer {
+                $0.removeFromSuperlayer()
+            }
+        }
     }
     
 }
+
