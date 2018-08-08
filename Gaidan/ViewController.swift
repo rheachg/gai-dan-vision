@@ -51,7 +51,7 @@ extension ViewController: VisionServiceDelegate {
 
 extension ViewController: OCRServiceDelegate {
     func ocrService(_ service: OCRService, didDetect rects: [(rect: CGRect, text: String)]) {
-        boxService.handle()
+        boxService.handle(previewLayer: cameraViewController.previewLayer, rects: rects, on: cameraViewController.view)
     }
 }
 

@@ -60,8 +60,8 @@ class OCRService {
             textObservations.removeAll()
             removeLayers(on: view)
             addRectLayers(on: view)
-            
         }
+        self.delegate?.ocrService(self, didDetect: self.detectedRects)
     }
 }
 
