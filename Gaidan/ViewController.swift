@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     private let cameraViewController = CameraViewController()
     private let visionService = VisionService()
     private let ocrService = OCRService()
+    private let boxService = BoxService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +26,7 @@ class ViewController: UIViewController {
         activate(cameraViewController.view.anchor.edges)
         
         visionService.delegate = self
+        ocrService.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,6 +46,12 @@ extension ViewController: CameraViewControllerDelegate {
 extension ViewController: VisionServiceDelegate {
     func visionService(_ version: VisionService, didDetect ciImage: CIImage, results: [VNTextObservation]) {
         ocrService.performRecognition(previewLayer: cameraViewController.previewLayer, ciImage: ciImage, results: results, on: cameraViewController.view)
+    }
+}
+
+extension ViewController: OCRServiceDelegate {
+    func ocrService(_ service: OCRService, didDetect rects: [(rect: CGRect, text: String)]) {
+        boxService.handle()
     }
 }
 

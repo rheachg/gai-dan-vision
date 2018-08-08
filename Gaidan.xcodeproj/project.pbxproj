@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		62A76A2F9877180350E643E9 /* Pods_Gaidan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D1199898BE43AD57EFAF1BF /* Pods_Gaidan.framework */; };
+		FD0FC510211AA90500670E2A /* BoxService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0FC50F211AA90500670E2A /* BoxService.swift */; };
 		FD6E28AE210AEDC800FE3F01 /* TesseractOCR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD6E28AD210AEDC800FE3F01 /* TesseractOCR.framework */; };
 		FD6E28B0210AEDDE00FE3F01 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD6E28AF210AEDDE00FE3F01 /* CoreImage.framework */; };
 		FD6E28B2210AEDF600FE3F01 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FD6E28B1210AEDF600FE3F01 /* libstdc++.6.0.9.tbd */; };
@@ -26,6 +27,7 @@
 		01797438E5A442735A5D12B2 /* Pods-Gaidan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gaidan.release.xcconfig"; path = "Pods/Target Support Files/Pods-Gaidan/Pods-Gaidan.release.xcconfig"; sourceTree = "<group>"; };
 		7D1199898BE43AD57EFAF1BF /* Pods_Gaidan.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gaidan.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FAB5C5B4944148FF1F1D7A0 /* Pods-Gaidan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gaidan.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Gaidan/Pods-Gaidan.debug.xcconfig"; sourceTree = "<group>"; };
+		FD0FC50F211AA90500670E2A /* BoxService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxService.swift; sourceTree = "<group>"; };
 		FD6E28AD210AEDC800FE3F01 /* TesseractOCR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TesseractOCR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD6E28AF210AEDDE00FE3F01 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		FD6E28B1210AEDF600FE3F01 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
@@ -100,6 +102,7 @@
 			children = (
 				FD80D180210AED0900342227 /* tessdata */,
 				FDADAE2F2106C6F50067DAB4 /* AppDelegate.swift */,
+				FD0FC50F211AA90500670E2A /* BoxService.swift */,
 				FD80D17821072D8000342227 /* CameraViewController.swift */,
 				FD80D17C210AEC1000342227 /* OCRService.swift */,
 				FD80D17A2109A92200342227 /* VisionService.swift */,
@@ -226,6 +229,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD80D17D210AEC1000342227 /* OCRService.swift in Sources */,
+				FD0FC510211AA90500670E2A /* BoxService.swift in Sources */,
 				FDADAE322106C6F50067DAB4 /* ViewController.swift in Sources */,
 				FDADAE302106C6F50067DAB4 /* AppDelegate.swift in Sources */,
 				FD80D17921072D8000342227 /* CameraViewController.swift in Sources */,

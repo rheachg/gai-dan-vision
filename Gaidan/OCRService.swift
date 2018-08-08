@@ -10,8 +10,13 @@ import TesseractOCR
 import Vision
 import AVFoundation
 
+protocol OCRServiceDelegate: class {
+    func ocrService(_ service: OCRService, didDetect rects: [(rect: CGRect, text: String)])
+}
+
 class OCRService {
     
+    weak var delegate: OCRServiceDelegate?
     private let tesseract = G8Tesseract(language: "chi_tra")!
     private var textObservations: [VNTextObservation] = []
     private var detectedRects = [(rect: CGRect, text: String)]()
@@ -55,6 +60,7 @@ class OCRService {
             textObservations.removeAll()
             removeLayers(on: view)
             addRectLayers(on: view)
+            
         }
     }
 }
