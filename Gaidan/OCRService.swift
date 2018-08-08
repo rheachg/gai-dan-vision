@@ -52,7 +52,6 @@ class OCRService {
                     }
                 }
             }
-            
             textObservations.removeAll()
             removeLayers(on: view)
             addRectLayers(on: view)
@@ -61,6 +60,28 @@ class OCRService {
 }
 
 extension OCRService {
+    
+    func adjustFontSize(of text: String, to height: CGFloat, to width: CGFloat, on layer: CATextLayer) -> CGFloat {
+        var fontSize = 25
+        var font = CTFontCreateWithName("Helvetica" as CFString, CGFloat(fontSize), nil)
+        var textHeight = text.heightOfString(usingFont: font)
+        
+        while textHeight > height {
+            fontSize -= 1
+            font = CTFontCreateWithName("Helvetica" as CFString, CGFloat(fontSize), nil)
+            textHeight = text.heightOfString(usingFont: font)
+        }
+        
+        var textWidth = text.widthOfString(usingFont: font)
+
+        while textWidth > width {
+            fontSize -= 1
+            font = CTFontCreateWithName("Helvetica" as CFString, CGFloat(fontSize), nil)
+            textWidth = text.widthOfString(usingFont: font)
+        }
+        
+        return CGFloat(fontSize)
+    }
     
     func addRectLayers(on view: UIView) {
         for tuple in detectedRects {
@@ -73,9 +94,10 @@ extension OCRService {
             rect.size.width *= view.frame.size.width
             rect.size.height *= view.frame.size.height
             
+            layer.fontSize = adjustFontSize(of: tuple.text, to: rect.height, to: rect.width, on: layer)
             layer.frame = rect
             layer.string = tuple.text
-            layer.foregroundColor = UIColor.darkGray.cgColor
+            layer.foregroundColor = UIColor.white.cgColor
             view.layer.addSublayer(layer)
         }        
     }
@@ -111,3 +133,16 @@ extension OCRService {
     
 }
 
+extension String {
+    func widthOfString(usingFont font: UIFont) -> CGFloat {
+        let fontAttributes = [kCTFontAttributeName: font]
+        let size = self.size(withAttributes: fontAttributes as [NSAttributedStringKey : Any])
+        return size.width
+    }
+    
+    func heightOfString(usingFont font: UIFont) -> CGFloat {
+        let fontAttributes = [kCTFontAttributeName: font]
+        let size = self.size(withAttributes: fontAttributes as [NSAttributedStringKey : Any])
+        return size.height
+    }
+}
