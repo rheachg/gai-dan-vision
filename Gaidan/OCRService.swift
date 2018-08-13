@@ -52,10 +52,8 @@ class OCRService {
                 }
             }
             textObservations.removeAll()
-            DispatchQueue.main.async {
-                self.removeLayers(on: view)
-                self.addRectLayers(on: view)
-            }
+            removeLayers(on: view)
+            addRectLayers(on: view)
         }
     }
 }
@@ -75,10 +73,10 @@ extension OCRService {
     }
     
     func addRectLayers(on view: UIView) {
-//        DispatchQueue.main.async {
+        DispatchQueue.main.async {
             for tuple in self.textPositionTuples {
-                let layer = CATextLayer()
-                layer.backgroundColor = UIColor.clear.cgColor
+                let textLayer = CATextLayer()
+                textLayer.backgroundColor = UIColor.clear.cgColor
                 var rect = tuple.rect
                 
                 rect.origin.x *= view.frame.size.width
@@ -86,13 +84,14 @@ extension OCRService {
                 rect.size.width *= view.frame.size.width
                 rect.size.height *= view.frame.size.height
                 
-                layer.fontSize = self.self.adjustFontSize(of: tuple.text, to: rect.height)
-                layer.frame = rect
-                layer.string = tuple.text
-                layer.foregroundColor = UIColor.white.cgColor
-                view.layer.addSublayer(layer)
+                textLayer.fontSize = self.self.adjustFontSize(of: tuple.text, to: rect.height)
+                textLayer.frame = rect
+                textLayer.string = tuple.text
+                textLayer.foregroundColor = UIColor.white.cgColor
+                
+                view.layer.addSublayer(textLayer)
             }
-//        }
+        }
     }
     
     func getImageFromCGRect(rect: CGRect, ciImage: CIImage) -> UIImage? {
@@ -115,14 +114,14 @@ extension OCRService {
     }
     
     func removeLayers(on view: UIView) {
-//        DispatchQueue.main.async {
+        DispatchQueue.main.async {
             guard let sublayers = view.layer.sublayers else { return }
-            for layer in sublayers[1...] {
+            for layer in sublayers[...1] {
                 if let _ = layer as? CATextLayer {
                     layer.removeFromSuperlayer()
                 }
             }
-//        }
+        }
     }
 }
 

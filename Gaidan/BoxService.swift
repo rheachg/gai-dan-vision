@@ -23,36 +23,32 @@ class BoxService {
 extension BoxService {
     
     func drawBoxes(rects: [VNTextObservation], on view: UIView) {
-//        DispatchQueue.main.async {
-            let viewWidth =  view.frame.size.width
-            let viewHeight = view.frame.size.height
+        let viewWidth =  view.frame.size.width
+        let viewHeight = view.frame.size.height
+        
+        for result in rects {
+            let layer = CALayer()
+            var rect = result.boundingBox
             
-            for result in rects {
-                let layer = CALayer()
-                var rect = result.boundingBox
-                
-                rect.origin.x *= viewWidth
-                rect.size.height *= viewHeight
-                rect.origin.y = ((1 - rect.origin.y) * viewHeight) - rect.size.height
-                rect.size.width *= viewWidth
-                
-                layer.frame = rect
-                layer.borderWidth = 2
-                layer.borderColor = UIColor.white.cgColor
-                    
-                view.layer.addSublayer(layer)
-            }
-//        }
+            rect.origin.x *= viewWidth
+            rect.size.height *= viewHeight
+            rect.origin.y = ((1 - rect.origin.y) * viewHeight) - rect.size.height
+            rect.size.width *= viewWidth
+            
+            layer.frame = rect
+            layer.borderWidth = 2
+            layer.borderColor = UIColor.white.cgColor
+            
+            view.layer.addSublayer(layer)
+        }
     }
     
     func removeLayers(on view: UIView) {
-//        DispatchQueue.main.async {
-            guard let sublayers = view.layer.sublayers else { return }
-            for layer in sublayers[1...] {
-                if (layer as? CATextLayer) == nil {
-                    layer.removeFromSuperlayer()
-                }
+        guard let sublayers = view.layer.sublayers else { return }
+        for layer in sublayers[1...] {
+            if (layer as? CATextLayer) == nil {
+                layer.removeFromSuperlayer()
             }
-//        }
+        }
      }
 }
