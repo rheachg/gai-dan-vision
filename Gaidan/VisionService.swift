@@ -20,17 +20,17 @@ class VisionService {
     
     func performVision(buffer: CMSampleBuffer) {
         guard var ciImage = getImageFromBuffer(sampleBuffer: buffer) else { return }
+        let transform = ciImage.orientationTransform(for: CGImagePropertyOrientation(rawValue: 6)!)
+        ciImage = ciImage.transformed(by: transform)
         
         let handler = VNImageRequestHandler(
             ciImage: ciImage,
-            orientation: CGImagePropertyOrientation(rawValue: 6)!,
+            orientation: .up,
             options: [VNImageOption: Any]()
         )
         
         let request = VNDetectTextRectanglesRequest(completionHandler: { [weak self] request, error in
-//            DispatchQueue.main.async {
-                self?.handle(ciImage: ciImage, request: request, error: error)
-//            }
+            self?.handle(ciImage: ciImage, request: request, error: error)
         })
         
         request.reportCharacterBoxes = true

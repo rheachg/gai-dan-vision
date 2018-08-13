@@ -22,7 +22,7 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     private var videoOutput: AVCaptureVideoDataOutput!
     
     // placeholder for passing captured buffer to touchesBegan
-    var buffer: CMSampleBuffer?
+//    var buffer: CMSampleBuffer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,22 +40,21 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     }
     
     func captureOutput( _ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        buffer = sampleBuffer
+//        buffer = sampleBuffer
         delegate?.cameraViewController(self, didCapture: sampleBuffer)
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let sampleBuffer = buffer {
-            delegate?.cameraViewController(self, didCapture: sampleBuffer)
-        }
-    }
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        if let sampleBuffer = buffer {
+//            delegate?.cameraViewController(self, didCapture: sampleBuffer)
+//        }
+//    }
 
 }
 
 extension CameraViewController {
     func setUpCaptureSession() {
         captureSession = AVCaptureSession()
-//        cameraView.session = captureSession
         captureSession.sessionPreset = .high
         guard
             let camera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back),
