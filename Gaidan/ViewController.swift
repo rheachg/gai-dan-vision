@@ -6,6 +6,7 @@
 //  Copyright © 2018 Rhea Chugh. All rights reserved.
 //
 
+import Anchors
 import AVFoundation
 import UIKit
 import Vision
@@ -14,13 +15,14 @@ class ViewController: UIViewController {
     
     private let cameraViewController = CameraViewController()
     private let visionService = VisionService()
+    private let ocrService = OCRService()
+    private let boxService = BoxService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // add to child controller
         cameraViewController.delegate = self
-        
+        add(childController: cameraViewController)
+        activate(cameraViewController.view.anchor.edges)
         visionService.delegate = self
     }
 
@@ -39,8 +41,16 @@ extension ViewController: CameraViewControllerDelegate {
 }
 
 extension ViewController: VisionServiceDelegate {
-    func visionService(_ version: VisionService, didDetect image: UIImage, results: [VNTextObservation]) {
-        
+    func visionService(_ version: VisionService, didDetect ciImage: CIImage, results: [VNTextObservation]) {
+        boxService.handle(previewLayer: cameraViewController.previewLayer, rects: results, on: cameraViewController.view)
+        ocrService.performRecognition(previewLayer: cameraViewController.previewLayer, ciImage: ciImage, results: results, on: cameraViewController.view)
     }
 }
 
+extension UIViewController {
+    func add(childController: UIViewController) {
+        childController.willMove(toParentViewController: self)
+        view.addSubview(childController.view)
+        childController.didMove(toParentViewController: self)
+    }
+}

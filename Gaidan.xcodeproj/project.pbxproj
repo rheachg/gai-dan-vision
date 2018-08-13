@@ -8,7 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		62A76A2F9877180350E643E9 /* Pods_Gaidan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D1199898BE43AD57EFAF1BF /* Pods_Gaidan.framework */; };
-		FD6E28AE210AEDC800FE3F01 /* TesseractOCR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD6E28AD210AEDC800FE3F01 /* TesseractOCR.framework */; };
+		FD0FC510211AA90500670E2A /* BoxService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0FC50F211AA90500670E2A /* BoxService.swift */; };
+		FD1322FD2121576900129D24 /* TesseractOCR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD1322FB212156BD00129D24 /* TesseractOCR.framework */; };
+		FD1323032121581800129D24 /* Dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1323022121581800129D24 /* Dummy.m */; };
 		FD6E28B0210AEDDE00FE3F01 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD6E28AF210AEDDE00FE3F01 /* CoreImage.framework */; };
 		FD6E28B2210AEDF600FE3F01 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FD6E28B1210AEDF600FE3F01 /* libstdc++.6.0.9.tbd */; };
 		FD80D17921072D8000342227 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD80D17821072D8000342227 /* CameraViewController.swift */; };
@@ -26,7 +28,11 @@
 		01797438E5A442735A5D12B2 /* Pods-Gaidan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gaidan.release.xcconfig"; path = "Pods/Target Support Files/Pods-Gaidan/Pods-Gaidan.release.xcconfig"; sourceTree = "<group>"; };
 		7D1199898BE43AD57EFAF1BF /* Pods_Gaidan.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gaidan.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FAB5C5B4944148FF1F1D7A0 /* Pods-Gaidan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gaidan.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Gaidan/Pods-Gaidan.debug.xcconfig"; sourceTree = "<group>"; };
-		FD6E28AD210AEDC800FE3F01 /* TesseractOCR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TesseractOCR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD0FC50F211AA90500670E2A /* BoxService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxService.swift; sourceTree = "<group>"; };
+		FD1322FB212156BD00129D24 /* TesseractOCR.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TesseractOCR.framework; sourceTree = "<group>"; };
+		FD1322FE212157C900129D24 /* Dummy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Dummy.h; sourceTree = "<group>"; };
+		FD1323012121581800129D24 /* Gaidan-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Gaidan-Bridging-Header.h"; sourceTree = "<group>"; };
+		FD1323022121581800129D24 /* Dummy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Dummy.m; sourceTree = "<group>"; };
 		FD6E28AF210AEDDE00FE3F01 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		FD6E28B1210AEDF600FE3F01 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
 		FD80D17821072D8000342227 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
@@ -47,8 +53,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD1322FD2121576900129D24 /* TesseractOCR.framework in Frameworks */,
 				62A76A2F9877180350E643E9 /* Pods_Gaidan.framework in Frameworks */,
-				FD6E28AE210AEDC800FE3F01 /* TesseractOCR.framework in Frameworks */,
 				FD6E28B0210AEDDE00FE3F01 /* CoreImage.framework in Frameworks */,
 				FD6E28B2210AEDF600FE3F01 /* libstdc++.6.0.9.tbd in Frameworks */,
 			);
@@ -71,7 +77,6 @@
 			children = (
 				FD6E28B1210AEDF600FE3F01 /* libstdc++.6.0.9.tbd */,
 				FD6E28AF210AEDDE00FE3F01 /* CoreImage.framework */,
-				FD6E28AD210AEDC800FE3F01 /* TesseractOCR.framework */,
 				7D1199898BE43AD57EFAF1BF /* Pods_Gaidan.framework */,
 			);
 			name = Frameworks;
@@ -80,6 +85,7 @@
 		FDADAE232106C6F50067DAB4 = {
 			isa = PBXGroup;
 			children = (
+				FD1322FB212156BD00129D24 /* TesseractOCR.framework */,
 				FDADAE2E2106C6F50067DAB4 /* Gaidan */,
 				FDADAE2D2106C6F50067DAB4 /* Products */,
 				6FB5C0E139CCE15E025E9964 /* Pods */,
@@ -100,6 +106,7 @@
 			children = (
 				FD80D180210AED0900342227 /* tessdata */,
 				FDADAE2F2106C6F50067DAB4 /* AppDelegate.swift */,
+				FD0FC50F211AA90500670E2A /* BoxService.swift */,
 				FD80D17821072D8000342227 /* CameraViewController.swift */,
 				FD80D17C210AEC1000342227 /* OCRService.swift */,
 				FD80D17A2109A92200342227 /* VisionService.swift */,
@@ -108,6 +115,9 @@
 				FDADAE362106C6F70067DAB4 /* Assets.xcassets */,
 				FDADAE382106C6F70067DAB4 /* LaunchScreen.storyboard */,
 				FDADAE3B2106C6F70067DAB4 /* Info.plist */,
+				FD1322FE212157C900129D24 /* Dummy.h */,
+				FD1323022121581800129D24 /* Dummy.m */,
+				FD1323012121581800129D24 /* Gaidan-Bridging-Header.h */,
 			);
 			path = Gaidan;
 			sourceTree = "<group>";
@@ -146,6 +156,7 @@
 				TargetAttributes = {
 					FDADAE2B2106C6F50067DAB4 = {
 						CreatedOnToolsVersion = 9.4;
+						LastSwiftMigration = 0940;
 					};
 				};
 			};
@@ -189,11 +200,11 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Gaidan/Pods-Gaidan-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/TesseractOCRiOS/TesseractOCR.framework",
+				"${BUILT_PRODUCTS_DIR}/Anchors/Anchors.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TesseractOCR.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Anchors.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -225,7 +236,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD1323032121581800129D24 /* Dummy.m in Sources */,
 				FD80D17D210AEC1000342227 /* OCRService.swift in Sources */,
+				FD0FC510211AA90500670E2A /* BoxService.swift in Sources */,
 				FDADAE322106C6F50067DAB4 /* ViewController.swift in Sources */,
 				FDADAE302106C6F50067DAB4 /* AppDelegate.swift in Sources */,
 				FD80D17921072D8000342227 /* CameraViewController.swift in Sources */,
@@ -376,17 +389,30 @@
 			baseConfigurationReference = 7FAB5C5B4944148FF1F1D7A0 /* Pods-Gaidan.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SGLNWMQ66C;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Gaidan/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = (
+					"-lstdc++",
+					"$(inherited)",
+					"-framework",
+					"\"Anchors\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.Gaidan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Gaidan/Gaidan-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -397,17 +423,29 @@
 			baseConfigurationReference = 01797438E5A442735A5D12B2 /* Pods-Gaidan.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SGLNWMQ66C;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Gaidan/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = (
+					"-lstdc++",
+					"$(inherited)",
+					"-framework",
+					"\"Anchors\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.Gaidan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Gaidan/Gaidan-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

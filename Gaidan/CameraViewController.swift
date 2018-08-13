@@ -18,11 +18,8 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     weak var delegate: CameraViewControllerDelegate?
     
     private var captureSession: AVCaptureSession!
-    private var previewLayer: AVCaptureVideoPreviewLayer!
+    public var previewLayer: AVCaptureVideoPreviewLayer!
     private var videoOutput: AVCaptureVideoDataOutput!
-    
-    // placeholder for passing captured buffer to touchesBegan
-    var buffer: CMSampleBuffer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,39 +37,32 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     }
     
     func captureOutput( _ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        buffer = sampleBuffer
+        delegate?.cameraViewController(self, didCapture: sampleBuffer)
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let sampleBuffer = buffer {
-            delegate?.cameraViewController(self, didCapture: sampleBuffer)
-        }
-    }
-
 }
 
 extension CameraViewController {
     func setUpCaptureSession() {
         captureSession = AVCaptureSession()
-        captureSession.sessionPreset = AVCaptureSession.Preset.photo
+        captureSession.sessionPreset = .high
         guard
             let camera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back),
             let captureInputDevice = try? AVCaptureDeviceInput(device: camera)
         else { return }
-//        guard captureSession.canAddInput(captureInputDevice) else { return }
+        guard captureSession.canAddInput(captureInputDevice) else { return }
         captureSession.addInput(captureInputDevice)
     }
     
     func setUpPreviewLayer() {
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        previewLayer.videoGravity = .resizeAspectFill
+        previewLayer.videoGravity = .resize
         view.layer.addSublayer(previewLayer)
     }
     
     func setUpVideoOutput() {
         videoOutput = AVCaptureVideoDataOutput()
-        videoOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "VideoQueue"))
-//        guard captureSession.canAddOutput(videoOutput) else { return }
+        videoOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "VideoQueue", qos: .userInteractive, attributes: .concurrent, autoreleaseFrequency: .inherit, target: nil))
+        guard captureSession.canAddOutput(videoOutput) else { return }
         captureSession.addOutput(videoOutput)
     }
 }
