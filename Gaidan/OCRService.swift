@@ -39,7 +39,6 @@ class OCRService {
             
             for chr in text {
                 if chr == "雞" || chr == "蛋" {
-                    print("found gaidan")
                     text = text.replacingOccurrences(of: "雞", with: "chicken")
                     text = text.replacingOccurrences(of: "蛋", with: "egg")
                     if !text.isEmpty {
@@ -118,6 +117,7 @@ extension OCRService {
             guard let sublayers = view.layer.sublayers else { return }
             for layer in sublayers[...1] {
                 if let _ = layer as? CATextLayer {
+                    // FIXME - textLayer not being removed
                     layer.removeFromSuperlayer()
                 }
             }
