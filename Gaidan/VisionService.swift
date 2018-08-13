@@ -19,7 +19,7 @@ class VisionService {
     weak var delegate: VisionServiceDelegate?
     
     func performVision(buffer: CMSampleBuffer) {
-        guard let ciImage = getImageFromBuffer(sampleBuffer: buffer) else { return }
+        guard var ciImage = getImageFromBuffer(sampleBuffer: buffer) else { return }
         
         let handler = VNImageRequestHandler(
             ciImage: ciImage,
@@ -28,9 +28,9 @@ class VisionService {
         )
         
         let request = VNDetectTextRectanglesRequest(completionHandler: { [weak self] request, error in
-            DispatchQueue.main.async {
+//            DispatchQueue.main.async {
                 self?.handle(ciImage: ciImage, request: request, error: error)
-            }
+//            }
         })
         
         request.reportCharacterBoxes = true
@@ -40,8 +40,10 @@ class VisionService {
     }
     
     private func handle(ciImage: CIImage, request: VNRequest, error: Error?) {
-        guard let results = request.results as? [VNTextObservation] else { return }
-        delegate?.visionService(self, didDetect: ciImage, results: results)
+        guard let textResults = request.results else { return }
+        let results = textResults.map() { return $0 as? VNTextObservation }
+        if results.isEmpty { return }
+        delegate?.visionService(self, didDetect: ciImage, results: results as! [VNTextObservation])
     }
     
 }

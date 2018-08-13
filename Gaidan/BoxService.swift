@@ -12,42 +12,47 @@ import Vision
 
 class BoxService {
     
-    func handle(previewLayer: AVCaptureVideoPreviewLayer, rects: [(rect: CGRect, text: String)], on view: UIView) {
-        removeLayers(on: view)
-        drawBoxes(rects: rects, on: view)
+    func handle(previewLayer: AVCaptureVideoPreviewLayer, rects: [VNTextObservation], on view: UIView) {
+        DispatchQueue.main.async {
+            self.removeLayers(on: view)
+            self.drawBoxes(rects: rects, on: view)
+        }
     }
-    
 }
 
 extension BoxService {
     
-    func drawBoxes(rects: [(rect: CGRect, text: String)], on view: UIView) {
-        let viewWidth = view.frame.size.width
-        let viewHeight = view.frame.size.height
-        
-        for result in rects {
-            let layer = CALayer()
-            var rect = result.rect
+    func drawBoxes(rects: [VNTextObservation], on view: UIView) {
+//        DispatchQueue.main.async {
+            let viewWidth =  view.frame.size.width
+            let viewHeight = view.frame.size.height
             
-            rect.origin.x *= viewWidth
-            rect.size.height *= viewHeight
-            rect.origin.y = ((1 - rect.origin.y) * viewHeight) - rect.size.height
-            rect.size.width *= viewWidth
-            
-            layer.frame = rect
-            layer.borderWidth = 2
-            layer.borderColor = UIColor.white.cgColor
-            view.layer.addSublayer(layer)
-            
-        }
-        
+            for result in rects {
+                let layer = CALayer()
+                var rect = result.boundingBox
+                
+                rect.origin.x *= viewWidth
+                rect.size.height *= viewHeight
+                rect.origin.y = ((1 - rect.origin.y) * viewHeight) - rect.size.height
+                rect.size.width *= viewWidth
+                
+                layer.frame = rect
+                layer.borderWidth = 2
+                layer.borderColor = UIColor.white.cgColor
+                    
+                view.layer.addSublayer(layer)
+            }
+//        }
     }
     
     func removeLayers(on view: UIView) {
-        view.layer.sublayers?.forEach {
-            if let _ = $0 as? CATextLayer {
-                $0.removeFromSuperlayer()
+//        DispatchQueue.main.async {
+            guard let sublayers = view.layer.sublayers else { return }
+            for layer in sublayers[1...] {
+                if (layer as? CATextLayer) == nil {
+                    layer.removeFromSuperlayer()
+                }
             }
-        }
-    }
+//        }
+     }
 }

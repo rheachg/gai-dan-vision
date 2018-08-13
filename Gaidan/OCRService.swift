@@ -10,16 +10,17 @@ import TesseractOCR
 import Vision
 import AVFoundation
 
-protocol OCRServiceDelegate: class {
-    func ocrService(_ service: OCRService, didDetect rects: [(rect: CGRect, text: String)])
-}
+//protocol OCRServiceDelegate: class {
+//    func ocrService(_ service: OCRService, didDetect rects: [VNTextObservation])
+//}
 
 class OCRService {
     
-    weak var delegate: OCRServiceDelegate?
-    private let tesseract = G8Tesseract(language: "chi_tra")!
+//    weak var delegate: OCRServiceDelegate?
+    private let tesseract = G8Tesseract(language: "eng+chi_tra")!
     private var textObservations: [VNTextObservation] = []
-    private var detectedRects = [(rect: CGRect, text: String)]()
+    private var textPositionTuples = [(rect: CGRect, text: String)]()
+    private var detectedRects: [VNTextObservation] = []
     
     init() {
         tesseract.engineMode = .tesseractOnly
@@ -27,7 +28,6 @@ class OCRService {
     }
     
     func performRecognition(previewLayer: AVCaptureVideoPreviewLayer, ciImage: CIImage, results: [VNTextObservation], on view: UIView) {
-        
         textObservations = results
         let size = ciImage.extent.size
         
@@ -45,23 +45,31 @@ class OCRService {
             
             for chr in text {
                 if chr == "雞" || chr == "蛋" {
+                    
+                    print("found gaidan")
+                    
+//                    detectedRects.append(imageRect)
                     text = text.replacingOccurrences(of: "雞", with: "chicken")
                     text = text.replacingOccurrences(of: "蛋", with: "egg")
-                    
+                
                     if !text.isEmpty {
                         let x = xMin
                         let y = 1 - yMax
                         let width = xMax - xMin
                         let height = yMax - yMin
-                        detectedRects.append((rect: CGRect(x: x, y: y, width: width, height: height), text: text))
+                        textPositionTuples.append((rect: CGRect(x: x, y: y, width: width, height: height), text: text))
+//                        detectedRects.append(textObservation)
+                        addRectLayers(on: view)
                     }
                 }
             }
             textObservations.removeAll()
-            removeLayers(on: view)
-            addRectLayers(on: view)
+//            DispatchQueue.main.async {
+                self.removeLayers(on: view)
+                self.addRectLayers(on: view)
+//            }
         }
-        self.delegate?.ocrService(self, didDetect: self.detectedRects)
+//        self.delegate?.ocrService(self, didDetect: self.detectedRects)
     }
 }
 
@@ -90,26 +98,28 @@ extension OCRService {
     }
     
     func addRectLayers(on view: UIView) {
-        for tuple in detectedRects {
-            let layer = CATextLayer()
-            layer.backgroundColor = UIColor.clear.cgColor
-            var rect = tuple.rect
-            
-            rect.origin.x *= view.frame.size.width
-            rect.origin.y *= view.frame.size.height
-            rect.size.width *= view.frame.size.width
-            rect.size.height *= view.frame.size.height
-            
-            layer.fontSize = adjustFontSize(of: tuple.text, to: rect.height, to: rect.width, on: layer)
-            layer.frame = rect
-            layer.string = tuple.text
-            layer.foregroundColor = UIColor.white.cgColor
-            view.layer.addSublayer(layer)
-        }        
+        DispatchQueue.main.async {
+            for tuple in self.textPositionTuples {
+                let layer = CATextLayer()
+                layer.backgroundColor = UIColor.clear.cgColor
+                var rect = tuple.rect
+                
+                rect.origin.x *= view.frame.size.width
+                rect.origin.y *= view.frame.size.height
+                rect.size.width *= view.frame.size.width
+                rect.size.height *= view.frame.size.height
+                
+                layer.fontSize = self.self.adjustFontSize(of: tuple.text, to: rect.height, to: rect.width, on: layer)
+                layer.frame = rect
+                layer.string = tuple.text
+                layer.foregroundColor = UIColor.white.cgColor
+                view.layer.addSublayer(layer)
+            }
+        }
     }
     
     func getImageFromCGRect(rect: CGRect, ciImage: CIImage) -> UIImage? {
-        guard let cgImage = CIContext().createCGImage(ciImage, from: rect) else { return nil }
+        guard let cgImage = CIContext(options: nil).createCGImage(ciImage, from: rect) else { return nil }
         return UIImage(cgImage: cgImage)
     }
     
@@ -121,8 +131,8 @@ extension OCRService {
         
         for rect in rects {
             xMin = min(xMin, rect.bottomLeft.x)
-            yMin = min(yMin, rect.bottomRight.y)
             xMax = max(xMax, rect.bottomRight.x)
+            yMin = min(yMin, rect.bottomRight.y)
             yMax = max(yMax, rect.topRight.y)
         }
         
@@ -130,13 +140,15 @@ extension OCRService {
     }
     
     func removeLayers(on view: UIView) {
-        view.layer.sublayers?.forEach {
-            if let _ = $0 as? CATextLayer {
-                $0.removeFromSuperlayer()
+        DispatchQueue.main.async {
+            guard let sublayers = view.layer.sublayers else { return }
+            for layer in sublayers[1...] {
+                if let _ = layer as? CATextLayer {
+                    layer.removeFromSuperlayer()
+                }
             }
         }
     }
-    
 }
 
 extension String {
