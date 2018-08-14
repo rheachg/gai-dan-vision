@@ -21,7 +21,7 @@ class OCRService {
         tesseract.pageSegmentationMode = .sparseText
     }
     
-    func performRecognition(previewLayer: AVCaptureVideoPreviewLayer, ciImage: CIImage, results: [VNTextObservation], on view: UIView) {
+    func performRecognition(ciImage: CIImage, results: [VNTextObservation], on view: UIView) {
         textObservations = results
         let size = ciImage.extent.size
         
