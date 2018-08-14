@@ -43,7 +43,7 @@ extension ViewController: CameraViewControllerDelegate {
 extension ViewController: VisionServiceDelegate {
     func visionService(_ version: VisionService, didDetect ciImage: CIImage, results: [VNTextObservation]) {
         boxService.handle(previewLayer: cameraViewController.previewLayer, rects: results, on: cameraViewController.view)
-        ocrService.performRecognition(previewLayer: cameraViewController.previewLayer, ciImage: ciImage, results: results, on: cameraViewController.view)
+        ocrService.performRecognition(ciImage: ciImage, results: results, on: cameraViewController.view)
     }
 }
 
